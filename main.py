@@ -1,12 +1,26 @@
-import bcrypt
+from log_hash import register_user, log_in_user
 
-password = 'Magic123'
+def menu():
+    print('*'*30)
+    print('*** Welcome to my system ***')
+    print('Choose frome the following option :')
+    print(' 1. Register\n 2. Login\n 3. Exit')
+    print('*'*30)
 
-def hash_password(password):
-    binery_password = password.encode('utf-8')
-    salt = bcrypt.gensalt()
-    hash = bcrypt.hashpw(binery_password,salt)
-    return hash.decode('utf-8')
+def main():
+    while True:
+        menu()
+        choice = input('> ')
+        if choice =='1':
+            register_user()
+        elif choice == '2':
+            if log_in_user():
+                print('You logged in Successfully')
+            else:
+                print('Incorrect Login')
+        elif choice == '3':
+            print('Good Bye!!')
+            break
 
-password = 'Magic123'
-print('Hashpassword -> ',hash_password(password))
+if __name__ == '__main__':
+    main()
