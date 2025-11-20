@@ -1,4 +1,13 @@
 import bcrypt
+import sqlite3
+
+
+def put_it_in_the_database(sql, param):
+    conn = sqlite3.connect("DATA\\itelligence_platform.db")
+    curr = conn.cursor()
+    curr.execute(sql, param)
+    conn.commit()
+    conn.close()
 
 def hash_password(password):
     binery_password = password.encode('utf-8')
@@ -18,6 +27,14 @@ def register_user():
     hash = hash_password(user_pwd)
     with open('user.txt','a')as f:
          f.write(f'{user_name},{hash}\n')
+
+def register_user_db():
+    user_name = input('Enter your user name: ')
+    user_pwd = input('Enter your password: ')
+    hash = hash_password(user_pwd)
+    sql = """INSERT INTO users (username, password_hash) VALUES (?, ?)"""
+    param = (user_name, user_pwd)
+    put_it_in_the_database(sql, param)
 
 def log_in_user():
     user_name = input('Enter your user name: ')

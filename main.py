@@ -1,4 +1,4 @@
-from log_hash import register_user, log_in_user
+from log_hash import register_user_db, log_in_user
 
 def menu():
     print('*'*30)
@@ -12,7 +12,8 @@ def main():
         menu()
         choice = input('> ')
         if choice =='1':
-            register_user()
+            #register_user()
+            register_user_db()
         elif choice == '2':
             if log_in_user():
                 print('You logged in Successfully')
